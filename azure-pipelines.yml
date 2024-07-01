@@ -1,7 +1,5 @@
 trigger:
-  branches:
-    include:
-      - main
+- master  # Assuming 'master' is your main branch, adjust as necessary
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -14,6 +12,11 @@ steps:
   inputs:
     versionSpec: '3.x'
     addToPath: true
+
+- script: |
+    echo "Creating a basic requirements.txt"
+    echo "pytest" > requirements.txt
+  displayName: 'Create requirements.txt'
 
 - script: |
     python -m venv env
