@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- script: |
+    python -m venv env
+    source env/bin/activate
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    source env/bin/activate
+    pytest
+  displayName: 'Run tests'
